@@ -1,6 +1,6 @@
 {
-	"title": "IOT Device To Hub",
-	"abbr": "IOTDevice To Hub",
+	"title": "Device To Hub",
+	"abbr": "Device To Hub",
 	"tooltip": "A sample for sending data to cloud using the Microsoft Azure service",
 	"description": "An application demonstrating how to send temperature data from an IOT device to a IOT hub using the azure iot device node package.",
 	"repoName": "iotapp-device-to-hub",
