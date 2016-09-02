@@ -1,10 +1,9 @@
 {
-	"title": "IOT Device To Hub",
-	"abbr": "IOTDevice To Hub",
+	"title": "Device To Hub",
+	"abbr": "Device To Hub",
 	"tooltip": "A sample for sending data to cloud using the Microsoft Azure service",
 	"description": "An application demonstrating how to send temperature data from an IOT device to a IOT hub using the azure iot device node package.",
-	"repoName": "iotapp-device-hub",
-	"articleUrl": "https://github.com/gomobile/iotapp-device-to-hub",
+	"repoName": "iotapp-device-to-hub",
 	"section": "iot-templates",
 	"group": "other",
 	"template": true,
@@ -14,5 +13,5 @@
 	"projectTypeName": "com.intel.xdk.projecttype.iotapp",
 	"screenshotUrl": "",
 	"mobile": false,
-	"appName": "demo.devicehub"
+	"appName": "demo.devicetohub"
 }
