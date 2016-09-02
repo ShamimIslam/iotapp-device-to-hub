@@ -4,8 +4,8 @@
     "creationData": {
       "projectTypeName": "com.intel.xdk.projecttype.iotapp",
       "src": "",
-      "projectGuid": "00000000-0000-0000-0000-000000000000",
-      "lastModifiedDate": 1471539494036,
+      "projectGuid": "9d94ae7f-ed26-4634-b2ee-d263aa52c8c4",
+      "lastModifiedDate": 1472839306739,
       "creationDate": 1471538552896
     },
     "sourceDirectory": "",
@@ -116,7 +116,7 @@
         "certificateId_": "",
         "appVersion_": "0.0.1",
         "appVersionCode_": "1",
-        "crosswalkVersion_": "?",
+        "crosswalkVersion_": "19",
         "cordovaCLIVersion_": "5.4.1"
       }
     },

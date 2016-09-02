@@ -1,32 +1,50 @@
-/*jslint node:true, vars:true, bitwise:true, unparam:true */
-/*jshint unused:true */
-// Leave the above lines for propper jshinting
-//Type Node.js Here :)
 'use strict';
-
 var mraa = require("mraa");
+var fs = require('fs');
+var path = require('path');
 var clientFromConnectionString = require('azure-iot-device-amqp').clientFromConnectionString;
 var Message = require('azure-iot-device').Message;
-var identity = require('./CreateIdentity'); //CHANGE THIS TO PASS INFORMATION TO CONNECTION STRING
+var iothub = require('azure-iothub');
 
-var connectionString = "HostName=sample-temperature-app.azure-devices.net;DeviceId=myTempMonitorDevice;SharedAccessKey=vwEJ9BRkff/F3G8MGHuTp4oXcVPjYP637PmPXSwhhCw=";//OUR CONNECTION STRING SHOULD BE HOSTNAME,DEVICEID,DEVICE KEY -- WERE DEVICEID AND DEVICE KEY COME FROM IDENTITY I.E.IDENTITY.DEVICEID
-var client = clientFromConnectionString(connectionString);
+var deviceId = 'myTempMonitorDevice';
+var device = new iothub.Device(null);
+device.deviceId = deviceId;
+var client;
+
+//parse in the information from our connection.json - to be used in connection string building
+var connectString = JSON.parse(
+  fs.readFileSync(path.join(__dirname, "connection.json"))
+);
+
+//This needs to be changed to match the connection string provided from YOUR hub - go into the connection.json to do so
+var connectionString = "HostName=" + connectString.HOST_NAME + ";" + "SharedAccessKeyName=" + connectString.SHARE_ACCESS_NAME + ";" + "SharedAccessKey=" + connectString.FIRST_KEY + ";"
+var registry = iothub.Registry.fromConnectionString(connectionString);
 
 var fahrenheit_temperature = -1000;
 var celsius_temperature = -1000;
-
-
 //GROVE Kit A0 Connector --> Aio(0)
 var myAnalogPin = new mraa.Aio(0);
 var B = 3975;
 
+//grab temperature info
 function getTemp () { 
-var a = myAnalogPin.read();
-var resistance = (1023 - a) * 10000 / a; //get the resistance of the sensor;
-celsius_temperature = 1 / (Math.log(resistance / 10000) / B + 1 / 298.15) - 273.15;//convert to temperature via datasheet
-fahrenheit_temperature = (celsius_temperature * (9 / 5)) + 32;
-console.log("Fahrenheit Temperature: " + fahrenheit_temperature);
+    var a = myAnalogPin.read();
+    var resistance = (1023 - a) * 10000 / a; //get the resistance of the sensor;
+    celsius_temperature = 1 / (Math.log(resistance / 10000) / B + 1 / 298.15) - 273.15;//convert to temperature via datasheet
+    fahrenheit_temperature = (celsius_temperature * (9 / 5)) + 32;
+    console.log("Fahrenheit Temperature: " + fahrenheit_temperature);
 };
+
+function getDeviceInfo(err, deviceInfo, res) {
+  if (deviceInfo) {
+        //grabs the deviceID and the device share key
+        var connectionString2 = "HostName=" + connectString.HOST_NAME + ";DeviceId=" + device.deviceId+";SharedAccessKeyName="+connectString.SHARE_ACCESS_NAME+";SharedAccessKey="+deviceInfo.authentication.SymmetricKey.primaryKey+";"
+        
+        //now we can run our message sender 
+        client = clientFromConnectionString(connectionString2);
+        client.open(connectCallback);
+  };
+}
 
 var connectCallback = function (err) {
   if (err) {
@@ -36,6 +54,7 @@ var connectCallback = function (err) {
       
     setInterval(function() {
         getTemp();
+        //our message to send
         var message = new Message('Farenheit Temp: ' + fahrenheit_temperature + '\n' + 'Celsius Temp: ' + celsius_temperature);
         client.sendEvent(message, function (err) {
         if (err) console.log(err.toString());
@@ -47,8 +66,17 @@ var connectCallback = function (err) {
             console.log('completed');
             });
         }); 
-    }, 5000);
+    }, 5000);//we send info every five seconds (new temp)
   }
 };
 
-client.open(connectCallback);
+registry.create(device, function(err, deviceInfo, res) {
+  if (err) {
+    registry.get(device.deviceId, getDeviceInfo);
+  }
+  if (deviceInfo) {
+      getDeviceInfo(err, deviceInfo, res);
+  }
+});
+
+    
