@@ -1,4 +1,4 @@
-Iot Device to Hub App
+Device to Hub App
 ============================
 This sample app demonstrates how to pass sensor data from an IoT Device (Intel Edison or Intel Galileo) and send it to the Microsoft Azure Hub. This hub then encrypts the data and allows the user to either store or read the information received from the device.
 
