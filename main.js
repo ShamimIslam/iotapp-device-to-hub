@@ -21,12 +21,12 @@
 "use strict" ;
 
 
-var mraa = require("mraa");
 var fs = require('fs');
 var path = require('path');
-var clientFromConnectionString = require('azure-iot-device-amqp').clientFromConnectionString;
-var Message = require('azure-iot-device').Message;
+var mraa = require("mraa");
 var iothub = require('azure-iothub');
+var Message = require('azure-iot-device').Message;
+var clientFromConnectionString = require('azure-iot-device-amqp').clientFromConnectionString;
 
 var deviceId = 'myTempMonitorDevice';
 var device = new iothub.Device(null);

@@ -1,5 +1,6 @@
 Intel® XDK IoT Node.js\* Device to Hub App
 ==========================================
+
 See [LICENSE.md](LICENSE.md) for license terms and conditions.
 
 This sample application is distributed as part of the
@@ -19,6 +20,7 @@ information regarding the upm sensor and actuator library APIs.
 
 App Overview
 ------------
+
 This sample app demonstrates how to pass sensor data from an IoT Device and
 send it to your Microsoft Azure Hub account. The hub  encrypts the data you
 send and allows you to store and retrieve the information received from IoT
@@ -32,6 +34,7 @@ device by another device or system.
 
 Hardware Requirements
 ---------------------
+
 * Compatible IoT development board with the appropriate I/O sensors.
 
 * [Seeed Studio\* “Base Shield”](https://www.seeedstudio.com/item_detail.html?p_id=1855)
@@ -41,6 +44,7 @@ Hardware Requirements
 
 Getting Started
 ---------------
+
 Download and unzip a copy of the project files and put it into an easily
 accessible folder on your workstation.
 
@@ -74,6 +78,7 @@ IoT Hub Owner > Connection String - Primary.
 
 Connecting Hardware
 -------------------
+
 Once your source files are ready to go, you can go ahead and connect your
 device in the following manner.
 
@@ -91,23 +96,27 @@ device in the following manner.
 
 Running the Project
 -------------------
+
 After all hardware and software configuration are complete, be sure to
 configure your IoT board's network interface so it has access to the Internet.
 
 Important App Files
 -------------------
+
 * main.js
 * package.json
 * connection.json
 
 Important Project Files
 -----------------------
+
 * README.md
 * LICENSE.md
 * \<project-name\>.xdk
 
 Tested IoT Node.js Platforms
 ----------------------------
+
 * [Intel® Galileo Board for Arduino](http://intel.com/galileo)
 * [Intel® Edison Board for Arduino](http://intel.com/edison)
 

@@ -8,7 +8,7 @@
   "repoName" : "iotapp-device-to-hub",
   "tooltip" : "Send data to the Microsoft Azure cloud service",
   "description" : "Sends temperature data from an IoT device to an IoT Azure \"hub\" using the Microsoft Azure IoT device Node.js package.",
-  "articleUrl" : "https://github.com/gomobile/iotapp-device-to-hub/blob/master/README.md",
+  "articleUrl" : "https://software.intel.com/en-us/xdk/docs/using-templates-nodejs-iot",
   "keywords" : ["mraa","azure"],
   "targets" : ["edison","galileo"],
   "runtimes" : ["node"]
